@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import './commentsection.css'
+import PropTypes from 'prop-types';
 
 export class CommentSection extends Component {
+
     render() {
         // console.log(this.props.comments)
         return (
@@ -14,12 +16,20 @@ export class CommentSection extends Component {
                     </div>
                         ))}
                </div>
-               <div className="addcomment">
-                    <input placeholder="Add a comment..." />
-               </div>
+               <form className="addcomment">
+                    <input value={this.props.commentText} placeholder="Add a comment..." onChange={this.props.handleCommentChange} />
+               </form>
             </div>
         )
     }
+}
+
+CommentSection.propTypes = {
+    comments:PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        username: PropTypes.string,
+        text: PropTypes.string
+    }))
 }
 
 export default CommentSection
