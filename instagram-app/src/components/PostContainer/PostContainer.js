@@ -4,7 +4,31 @@ import CommentSection from '../CommentSection/CommentSection'
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 
+
 export class PostContainer extends Component {
+    constructor(props){
+        super(props);
+        this.state= {
+            likes: this.props.data.likes,
+            liked: false
+        }
+    }
+
+    selected = e => {
+        this.setState( prevState => {
+            let liked = !prevState.liked;
+            let likes = prevState.likes;
+            let newState = {
+                liked: liked,
+                likes: likes
+            }
+            if(prevState.liked === false){
+                newState.likes = prevState.likes + 1
+            } else {
+                newState.likes = prevState.likes -1
+            }
+            return newState;
+    } )}
 
     render() {
         // console.log(this.props.data);
@@ -21,9 +45,9 @@ export class PostContainer extends Component {
                 </div>
 
                 <div className="likes">
-                    <FontAwesome className="heart" name='heart' />
-                    <p>{this.props.data.likes}</p>
-                    <FontAwesome className="comment" name='comment' />
+                    <FontAwesome className="heart" name='heart' onClick={this.selected} />
+                    <p>{this.state.likes}</p>
+                    <FontAwesome className="comment" name='comment' onClick={this.selected} />
                 </div>
 
                 <CommentSection comments={this.props.data.comments} id={this.props.data.id} addComment={this.props.addComment} />
