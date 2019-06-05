@@ -10,8 +10,8 @@ export class App extends Component {
     super();
     this.state = {
       data: [],
-      commentText: "",
-      userName: "philj"
+      filteredPosts: [],
+      search: ''
     }
   }
 
@@ -22,23 +22,41 @@ export class App extends Component {
   }
 
   componentDidUpdate(){
-    console.log("CHANGE")
+    // console.log(this.state.search);
   }
 
-  handleCommentChange = e => {
+  handleChanges = e => {
     this.setState({
-      comment: {
-        text: e.target.value
-      }
-
+      [e.target.name]: e.target.value
     })
+  }
+
+  searchFilter = e => {
+    const filtered = this.state.data.filter(post =>
+      post.username.toLowerCase().includes(e.target.value.toLowerCase()) ||
+      post.likes.toString().includes(e.target.value.toString()))
+    this.setState({filteredPosts: filtered})
   }
 
   render() {
     return (
       <div className="container">
-        <SearchBar />
-        {this.state.data.map( item =>  <PostContainer key={item.id} data={item} handleCommentChange={this.handleCommentChange} />)}
+        <SearchBar
+          handleChanges={this.handleChanges}
+          newSearch={this.state.search}
+          searchFilter={this.searchFilter}
+        />
+        {this.state.filteredPosts.length === 0 ? this.state.data.map( item =>
+        <PostContainer
+          key={item.id} data={item}
+          addComment={this.addComment}
+          />)
+          : this.state.filteredPosts.map( item =>
+            <PostContainer
+              key={item.id} data={item}
+              addComment={this.addComment}
+              />)
+        }
       </div>
     )
   }

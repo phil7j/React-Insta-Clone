@@ -26,7 +26,8 @@ export class PostContainer extends Component {
                     <FontAwesome className="comment" name='comment' />
                 </div>
 
-                <CommentSection comments={this.props.data.comments} handleCommentChange={this.props.handleCommentChange}/>
+                <CommentSection comments={this.props.data.comments} id={this.props.data.id} addComment={this.props.addComment} />
+
             </div>
         )
     }
