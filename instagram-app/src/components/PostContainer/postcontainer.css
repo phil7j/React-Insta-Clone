@@ -1,0 +1,45 @@
+.PostContainer {
+    border: 1px solid rgba(126, 126, 126, 0.589);
+    border-radius: 4px;
+    max-width: 600px;
+    margin:  5% auto;
+}
+
+.postauthor {
+    display: flex;
+    align-items: center;
+
+}
+
+.postauthor img {
+    width: auto;
+    height: 50px;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.mainpic img {
+    width: 100%;
+}
+
+.likes {
+    display: flex;
+    font-size: 1.5rem;
+    padding: 1%;
+    align-items: center;
+}
+
+.heart {
+    color: red;
+    margin: 5px;
+}
+
+.comment {
+    color: rgb(5, 122, 117);
+    margin: 5px;
+}
+
+.likes p {
+    margin: 0 15px 0 0;
+    font-size: 14px;
+}
